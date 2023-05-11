@@ -18,8 +18,16 @@ plugins=(git node npm tmux)
 source $ZSH/oh-my-zsh.sh
 
 # Activate ZSH Autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+export EDITOR="/usr/bin/nvim"
+
+###################
+## => TMUXIFIER
+###################
+
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
 
 ###################
 ## => NVM
