@@ -13,13 +13,15 @@ return require('packer').startup(function(use)
   use('nvim-tree/nvim-web-devicons')
   use('nvim-lualine/lualine.nvim')
   use('nvim-treesitter/nvim-treesitter')
-  use('bluz71/vim-nightfly-colors')
   use('tpope/vim-fugitive')
   use('tpope/vim-commentary')
   use('tpope/vim-surround')
   use('tpope/vim-unimpaired')
   use('tpope/vim-repeat')
+  use("theprimeagen/harpoon")
   use('alvan/vim-closetag')
+  use('preservim/vimux')
+  use('christoomey/vim-tmux-navigator')
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',

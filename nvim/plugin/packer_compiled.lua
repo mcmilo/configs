@@ -114,6 +114,11 @@ _G.packer_plugins = {
     path = "/home/camilo/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
+  harpoon = {
+    loaded = true,
+    path = "/home/camilo/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/theprimeagen/harpoon"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/camilo/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -199,11 +204,6 @@ _G.packer_plugins = {
     path = "/home/camilo/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
-  ["vim-nightfly-colors"] = {
-    loaded = true,
-    path = "/home/camilo/.local/share/nvim/site/pack/packer/start/vim-nightfly-colors",
-    url = "https://github.com/bluz71/vim-nightfly-colors"
-  },
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/camilo/.local/share/nvim/site/pack/packer/start/vim-repeat",
@@ -214,10 +214,20 @@ _G.packer_plugins = {
     path = "/home/camilo/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
   },
+  ["vim-tmux-navigator"] = {
+    loaded = true,
+    path = "/home/camilo/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
+    url = "https://github.com/christoomey/vim-tmux-navigator"
+  },
   ["vim-unimpaired"] = {
     loaded = true,
     path = "/home/camilo/.local/share/nvim/site/pack/packer/start/vim-unimpaired",
     url = "https://github.com/tpope/vim-unimpaired"
+  },
+  vimux = {
+    loaded = true,
+    path = "/home/camilo/.local/share/nvim/site/pack/packer/start/vimux",
+    url = "https://github.com/preservim/vimux"
   }
 }
 
