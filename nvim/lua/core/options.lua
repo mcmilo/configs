@@ -24,6 +24,10 @@ vim.cmd [[ set noswapfile ]]
 vim.wo.number = true
 vim.opt.relativenumber = true
 
+-- Text width
+vim.opt.colorcolumn = '100'
+vim.cmd [[ set tw=100 ]]
+
 --Search
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
