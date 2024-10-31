@@ -4,6 +4,7 @@ from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, KeyChord, Match, Screen, ScratchPad
 from libqtile.lazy import lazy
 import colors
+import os
 
 mod = "mod4"
 terminal = "kitty"
@@ -124,6 +125,8 @@ keys = [
     Key([mod], "F6",
         lazy.spawn("brightnessctl set 5%+"),
         desc="Increase the brightness"),
+
+    Key([mod], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
 ]
 
 # Create labels for groups and assign them a default layout.
@@ -205,10 +208,19 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font",
-    fontsize=12,
-    padding=3,
+    font = "JetBrainsMono Nerd Font",
+    fontsize = 12,
+    padding = 0,
     background=backgroundColor
+)
+spacer_defaults = dict(
+    background = workspaceColor,
+    length = 10
+)
+border_defaults = dict(
+    background = workspaceColor,
+    font = "JetBrainsMono Nerd Font",
+    fontsize = 30,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -218,85 +230,155 @@ wireless_interface = subprocess.run(
 
 def get_widgets(systray=False):
     widgets = [
-        widget.CurrentLayoutIcon(scale=0.5),
-        widget.GroupBox(),
+        widget.Spacer(**spacer_defaults),
+        widget.TextBox(
+            **border_defaults,
+            text="",
+            foreground = backgroundColor,
+        ),
+        widget.CurrentLayoutIcon(
+            scale=0.5
+        ),
+        widget.GroupBox(
+            padding = 3
+        ),
+        widget.TextBox(
+            **border_defaults,
+            text="",
+            foreground = backgroundColor,
+        ),
+        widget.Spacer(**spacer_defaults),
+        widget.Spacer(**spacer_defaults),
         widget.TaskList(
             icon_size=0,
             font = "JetBrainsMono Nerd Font",
-            foreground = colors[2],
-            background = backgroundColor,
+            foreground = foregroundColor,
+            background = workspaceColor,
             borderwidth = 1,
-            border = colors[1],
+            border = workspaceColor,
             margin = 0,
             padding = 10,
             highlight_method = "block",
             title_width_method = "uniform",
             urgent_alert_method = "border",
-            urgent_border = colors[1],
+            urgent_border = colors[6],
             rounded = False,
             txt_floating = "🗗 ",
             txt_maximized = "🗖 ",
             txt_minimized = "🗕 ",
         ),
-        widget.Spacer(length=10),
+        widget.Spacer(**spacer_defaults),
+        widget.Spacer(**spacer_defaults),
+        widget.TextBox(
+            **border_defaults,
+            text="",
+            foreground = backgroundColor,
+        ),
         widget.Chord(
             chords_colors={
                 "launch": (foregroundColor, backgroundColor),
             },
             name_transform=lambda name: name.upper(),
             foreground=chordColor,
-            font = "JetBrainsMono Nerd Font",
+            padding = 10,
         ),
         widget.Wlan(
             foreground=foregroundColor,
-            font = "JetBrainsMono Nerd Font",
+            padding = 5,
             interface=wireless_interface,
-            format='  {essid} {quality}%',
+            format='  {quality}%',
             mouse_callbacks=dict(
                 Button1=lambda: qtile.cmd_spawn('gnome-control-center network'))),
         widget.PulseVolume(
             foreground=colors[4],
+            padding = 5,
             fmt="墳 {}",
             update_interval=0.1,
             volume_app="pavucontrol",
             step=5),
+        # widget.Bluetooth(
+        #     foreground = colors[2],
+        #     fmt=" {}",
+        #     padding=10,
+        #     mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("blueman-manager")},
+        # ),
         widget.Battery(
             foreground=colors[8],
+            padding = 5,
             format="{char} {percent:2.0%}",
-            charge_char=" ",
-            discharge_char=" ",
-            empty_char=" ",
+            charge_char="",
+            discharge_char="",
+            empty_char="",
             full_char="",
-            unknown_char=" ",
+            unknown_char="",
             low_foreground=colors[9],
             low_percentage=0.15,
             show_short_text=False,
             notify_below=15
         ),
-        widget.KeyboardLayout(
-          configured_keyboards=['us', 'latam'],
-                  display_map={'us': 'EN', 'latam': 'ES'}),
+        widget.TextBox(
+            **border_defaults,
+            text="",
+            foreground = backgroundColor,
+        ),
+        widget.Spacer(**spacer_defaults),
+        widget.Spacer(**spacer_defaults),
+        widget.TextBox(
+            **border_defaults,
+            text="",
+            foreground = backgroundColor,
+        ),
         widget.Clock(
             format=" %a %b %d  %I:%M %P",
             foreground=foregroundColor,
             font="JetBrainsMono Nerd Font",
-            padding=10,
         ),
+        widget.Spacer(
+            length = 10,
+            background = backgroundColor,
+        ),
+        widget.KeyboardLayout(
+                padding = 0,
+                foreground = colors[5],
+                configured_keyboards=['us', 'latam'],
+                display_map={'us': 'EN', 'latam': 'ES'}),
+        widget.TextBox(
+            **border_defaults,
+            text="",
+            foreground = backgroundColor,
+        ),
+        widget.Spacer(**spacer_defaults),
         # widget.QuickExit(),
     ]
 
     if systray:
-        widgets.append(widget.Systray())
+        widgets.append(widget.Spacer(**spacer_defaults))
+        widgets.append(
+            widget.TextBox(
+                **border_defaults,
+                text="",
+                foreground = backgroundColor,
+            )
+        )
+        widgets.append(widget.Systray(background=backgroundColor))
+        widgets.append(
+            widget.TextBox(
+                **border_defaults,
+                text="",
+                foreground = backgroundColor,
+            )
+        )
+        widgets.append(widget.Spacer(**spacer_defaults))
 
     return widgets
 
 wallpaper_config = dict(
-    wallpaper="~/Pictures/wallpapers/deadpool.jpg",
+    wallpaper="~/Pictures/wallpapers/fantasy-4k-hd.jpg",
     wallpaper_mode="stretch"
 )
 
 def status_bar(widget_list):
-    return bar.Bar(widget_list, 36, background=backgroundColor, opacity=0.8)
+    return bar.Bar(widget_list, 36, background = workspaceColor)
 
 screens = [
     Screen(top=status_bar(get_widgets(systray=True)), **wallpaper_config),
@@ -357,8 +439,7 @@ wl_input_rules = None
 
 @hook.subscribe.startup_once
 def autostart():
-   script = os.path.expanduser('~/.config/qtile/scripts/autostart.sh')
-   subprocess.run([script])
+   subprocess.call([os.path.expanduser('.config/qtile/scripts/autostart.sh')])
 
 @hook.subscribe.client_new
 def client_new(client):
@@ -366,7 +447,7 @@ def client_new(client):
         client.togroup('1')
     if client.name == 'kitty':
         client.togroup('2')
-    if client.name == 'spotify':
+    if client.name == 'Spotify':
         client.togroup('9')
 
 wmname = "LG3D"

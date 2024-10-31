@@ -30,11 +30,11 @@ def everforest():
 			  ["#D196B3", "#D196B3"],  #pink [7]
 			  ["#A7C080", "#A7C080"],  #green [8]
 			  ['#ED8082', '#ED8080'],  #red [9]
-			  ["#D5C9AB", "#D5C9AB"]]  #beige [10]
+			  ["#4F585E", "#4F585E"]]  #yellow [10]
 			  
 	backgroundColor = "#2B3339"
 	foregroundColor = "#D5C9AB"
-	workspaceColor = "#A7C080"
+	workspaceColor = "#232A2E"
 	foregroundColorTwo = "#7c8377"
 	return colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo
 
