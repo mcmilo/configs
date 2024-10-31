@@ -3,7 +3,7 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
   use('ellisonleao/gruvbox.nvim')
@@ -50,4 +50,14 @@ return require('packer').startup(function(use)
     run = 'yarn install',
     ft = {'javascript', 'typescript', 'css', 'less', 'scss', 'graphql', 'markdown', 'vue', 'html'}
   }
+  use ('nvim-neotest/nvim-nio')
+  use {
+    'mfussenegger/nvim-dap',
+    requires = {
+      {'rcarriga/nvim-dap-ui'},
+      {'theHamsta/nvim-dap-virtual-text'},
+      {'mxsdev/nvim-dap-vscode-js'}
+    }
+  }
+  use 'anuvyklack/hydra.nvim'
 end)
