@@ -6,5 +6,8 @@ device_id=$(xinput list | grep 'Touchpad' | awk '{print $6}' | awk -F '=' '{prin
 prop_id=$(xinput list-props $device_id | grep 'Tapping Enabled (' | sed 's/\([^0-9]*\)\(.*\)/\2/' | sed 's/\([^)]*\).*/\1/')
 xinput set-prop $device_id $prop_id 1 &&
 
+# Multiple monitors setup
+$HOME/configs/qtile/scripts/setup-monitors.sh &&
+
 # Load Picom
 picom --vsync -b &
