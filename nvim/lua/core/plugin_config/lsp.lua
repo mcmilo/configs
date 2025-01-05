@@ -2,13 +2,14 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-  'tsserver',
-})
+-- lsp.ensure_installed({
+--   'tsserver',
+-- })
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
+local lspconfig = require("lspconfig") lspconfig["ts_ls"].setup({})
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
