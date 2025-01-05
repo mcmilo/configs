@@ -60,4 +60,10 @@ return require('packer').startup(function(use)
     }
   }
   use 'anuvyklack/hydra.nvim'
+  use {
+    'tadmccorkle/markdown.nvim',
+    requires = {
+      {'tree-sitter-grammars/tree-sitter-markdown'}
+    }
+  }
 end)
